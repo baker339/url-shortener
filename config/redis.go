@@ -2,6 +2,7 @@ package config
 
 import (
 	"context"
+	"crypto/tls"
 	"log"
 	"os"
 
@@ -15,6 +16,9 @@ func InitRedis() {
 	if err != nil {
 		log.Fatal("Invalid Redis URL:", err)
 	}
+
+	// Force TLS verification for Upstash
+	opt.TLSConfig = &tls.Config{MinVersion: tls.VersionTLS12}
 
 	RedisClient = redis.NewClient(opt)
 
