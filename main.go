@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"log"
 	"url-shortener/config"
 	"url-shortener/routes"
@@ -19,6 +20,14 @@ func main() {
 
 	// Start Fiber app
 	app := fiber.New()
+
+	// Enable CORS
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+		AllowMethods: "GET,POST",
+	}))
+
+	// Setup routes
 	routes.SetupRoutes(app)
 
 	// Run server
