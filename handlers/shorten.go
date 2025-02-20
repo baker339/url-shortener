@@ -29,5 +29,5 @@ func ShortenURL(c *fiber.Ctx) error {
 	config.RedisClient.Set(context.Background(), shortCode, request.OriginalURL, 0)
 
 	// Return response
-	return c.JSON(fiber.Map{"short_url": fmt.Sprintf("http://localhost:3000/%s", shortCode)})
+	return c.JSON(fiber.Map{"short_url": fmt.Sprintf("https://url-shortener-3b7-eg.fly.dev/%s", shortCode)})
 }
