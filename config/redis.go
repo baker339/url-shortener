@@ -17,8 +17,10 @@ func InitRedis() {
 		log.Fatal("Invalid Redis URL:", err)
 	}
 
-	// Force TLS verification for Upstash
-	opt.TLSConfig = &tls.Config{MinVersion: tls.VersionTLS12}
+	// ✅ Skip certificate verification (Fix for Fly.io + Upstash)
+	opt.TLSConfig = &tls.Config{
+		InsecureSkipVerify: true, // 🔥 This line disables cert verification
+	}
 
 	RedisClient = redis.NewClient(opt)
 
